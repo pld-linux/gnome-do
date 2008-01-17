@@ -1,6 +1,5 @@
 %include	/usr/lib/rpm/macros.mono
-Summary:	-
-Summary(pl.UTF-8):	-
+Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Name:		gnome-do
 Version:	0.3.0.1
 Release:	1
@@ -11,16 +10,19 @@ Source0:	http://do.davebsd.com/src/%{name}_%{version}.tar.gz
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	dotnet-gnome-sharp-devel
+BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel
-BuildRequires:	dotnet-gtk-sharp2-devel
-BuildRequires:	dotnet-gnome-sharp-devel
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-
-%description -l pl.UTF-8
+GNOME Do allows you to quickly search for many items present in your
+GNOME desktop environment (applications, Evolution contacts, Firefox
+bookmarks, files, artists and albums in Rhythmbox, Pidgin buddies,
+etc.) and perform commonly used actions on those items (Run, Open,
+Email, Chat, Play, etc.).
 
 %prep
 %setup -q -n do-0.3
