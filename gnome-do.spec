@@ -35,6 +35,14 @@ otwierać, wysyłać e-maile, rozmawiać, odtwarzać...).
 %prep
 %setup -q -n do-0.3
 
+# rewrite script: kill build paths, use proper libdir, avoid . in library path
+cat > Do/gnome-do.in <<'EOF'
+#!/bin/sh
+
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}%{_libdir}/tomboy"
+exec mono "%{_libdir}/do/Do.exe" "$@"
+EOF
+
 %build
 %{__aclocal}
 %{__autoconf}
@@ -46,7 +54,8 @@ otwierać, wysyłać e-maile, rozmawiać, odtwarzać...).
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	linuxpkgconfigdir=%{_pkgconfigdir}
 
 %find_lang %{name} --with-gnome
 
@@ -57,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/do
+%dir %{_libdir}/do
+%{_libdir}/do/Do.exe
+%{_libdir}/do/Do.*.dll
 %{_desktopdir}/gnome-do.desktop
-%{_pkgconfigdir}/do.*.pc
+%{_pkgconfigdir}/do.addins.pc
+%{_pkgconfigdir}/do.dbus.pc
