@@ -2,12 +2,12 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.3.0.1
+Version:	0.4.0.1
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://do.davebsd.com/src/%{name}_%{version}.tar.gz
-# Source0-md5:	b37928cbad12155e10304a5787e73ca2
+Source0:	https://launchpad.net/do/trunk/0.4/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	ff3a5d225fd0f23d1357a1e0e461fded
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -33,15 +33,7 @@ Pidginie itp.) i wykonywać na nich popularne czynności (uruchamiać,
 otwierać, wysyłać e-maile, rozmawiać, odtwarzać...).
 
 %prep
-%setup -q -n do-0.3
-
-# rewrite script: kill build paths, use proper libdir, avoid . in library path
-cat > Do/gnome-do.in <<'EOF'
-#!/bin/sh
-
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}%{_libdir}/tomboy"
-exec mono "%{_libdir}/do/Do.exe" "$@"
-EOF
+%setup -q
 
 %build
 %{__aclocal}
@@ -66,9 +58,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS
 %attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/do
-%{_libdir}/do/Do.exe
-%{_libdir}/do/Do.*.dll
+%dir %{_libdir}/gnome-do
+%{_libdir}/gnome-do/Do.exe
+%{_libdir}/gnome-do/Do.*.dll
+%{_libdir}/gnome-do/*.so
 %{_desktopdir}/gnome-do.desktop
 %{_pkgconfigdir}/do.addins.pc
 %{_pkgconfigdir}/do.dbus.pc
