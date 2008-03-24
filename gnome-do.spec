@@ -3,7 +3,7 @@ Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
 Version:	0.4.0.1
-Release:	3
+Release:	4
 License:	GPL v3
 Group:		X11/Applications
 Source0:	https://launchpad.net/do/trunk/0.4/+download/%{name}-%{version}.tar.gz
