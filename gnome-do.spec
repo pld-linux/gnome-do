@@ -32,6 +32,17 @@ Firefoksie, pliki, wykonawców i albumy w Rhythmboksie, osoby w
 Pidginie itp.) i wykonywać na nich popularne czynności (uruchamiać,
 otwierać, wysyłać e-maile, rozmawiać, odtwarzać...).
 
+%package devel
+Summary:	Development information for GNOME Do plugins
+Summary(pl.UTF-8):	Informacje programistyczne dla wtyczek GNOME Do
+Group:		X11/Development/Libraries
+
+%description devel
+Development information for GNOME Do plugins.
+
+%description devel -l pl.UTF-8
+Informacje programistyczne dla wtyczek GNOME Do.
+
 %prep
 %setup -q
 
@@ -60,14 +71,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS
 %attr(755,root,root) %{_bindir}/*
+%dir %{_prefix}/lib/gnome-do
+%{_prefix}/lib/gnome-do/Do.exe
+%{_prefix}/lib/gnome-do/Do.exe.config
+%{_prefix}/lib/gnome-do/Do.*.dll
+%{_prefix}/lib/gnome-do/Do.*.dll.mdb
 %dir %{_libdir}/gnome-do
-%{_libdir}/gnome-do/Do.exe
-%{_libdir}/gnome-do/Do.exe.config
-%{_libdir}/gnome-do/Do.*.dll
-%{_libdir}/gnome-do/Do.*.dll.mdb
 %{_libdir}/gnome-do/*.so
 %dir %{_datadir}/gnome-do
 %dir %{_datadir}/gnome-do/plugins
 %{_desktopdir}/gnome-do.desktop
+
+%files devel
+%defattr(644,root,root,755)
 %{_pkgconfigdir}/do.addins.pc
 %{_pkgconfigdir}/do.dbus.pc
