@@ -16,6 +16,10 @@ BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel
 BuildRequires:	mono-csharp >= 1.1.13
+Requires:       dotnet-gnome-sharp
+Requires:       dotnet-gtk-sharp2
+Requires:       dotnet-ndesk-dbus-sharp
+Requires:       dotnet-ndesk-glib-sharp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
