@@ -9,17 +9,18 @@ Group:		X11/Applications
 Source0:	https://launchpad.net/do/trunk/0.4/+download/%{name}-%{version}.tar.gz
 # Source0-md5:	ff3a5d225fd0f23d1357a1e0e461fded
 URL:		http://do.davebsd.com/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	dotnet-gnome-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel
+BuildRequires:	gtk+2-devel >= 1:2.0
+BuildRequires:	libtool
 BuildRequires:	mono-csharp >= 1.1.13
-Requires:       dotnet-gnome-sharp
-Requires:       dotnet-gtk-sharp2
-Requires:       dotnet-ndesk-dbus-sharp
-Requires:       dotnet-ndesk-glib-sharp
+BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(monoautodeps)
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,7 +51,10 @@ Informacje programistyczne dla wtyczek GNOME Do.
 %prep
 %setup -q
 
+sed -i -e 's/^pkglib_SCRIPTS =/DLLFILES =/;s/^programfiles_DATA.*/& $(DLLFILES)/' Makefile.include
+
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -59,12 +63,13 @@ Informacje programistyczne dla wtyczek GNOME Do.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_datadir}/gnome-do/plugins
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	linuxpkgconfigdir=%{_pkgconfigdir}
+
+rm $RPM_BUILD_ROOT%{_libdir}/gnome-do/*.la
 
 %find_lang %{name} --with-gnome
 
@@ -75,13 +80,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS
 %attr(755,root,root) %{_bindir}/*
+%dir %{_libdir}/gnome-do
+%attr(755,root,root) %{_libdir}/gnome-do/*.so
+%if "%{_prefix}/lib" != "%{_libdir}"
 %dir %{_prefix}/lib/gnome-do
+%endif
 %{_prefix}/lib/gnome-do/Do.exe
 %{_prefix}/lib/gnome-do/Do.exe.config
 %{_prefix}/lib/gnome-do/Do.*.dll
 %{_prefix}/lib/gnome-do/Do.*.dll.mdb
-%dir %{_libdir}/gnome-do
-%{_libdir}/gnome-do/*.so
 %dir %{_datadir}/gnome-do
 %dir %{_datadir}/gnome-do/plugins
 %{_desktopdir}/gnome-do.desktop
