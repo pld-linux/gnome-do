@@ -8,6 +8,7 @@ License:	GPL v3
 Group:		X11/Applications
 Source0:	https://launchpad.net/do/trunk/0.5/+download/%{name}-%{version}.tar.gz
 # Source0-md5:	1bc096b9ac6cd5fa30d5339be6dd6d9d
+Patch0:		%{name}-pkgconfig-fix.patch
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -52,6 +53,7 @@ Informacje programistyczne dla wtyczek GNOME Do.
 
 %prep
 %setup -q
+%patch0 -p1
 
 sed -i -e 's/^pkglib_SCRIPTS =/DLLFILES =/;s/^programfiles_DATA.*/& $(DLLFILES)/' Makefile.include
 
