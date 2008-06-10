@@ -24,6 +24,7 @@ BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
+Requires:	xdg-utils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
