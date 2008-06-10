@@ -2,15 +2,17 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.4.2.0
+Version:	0.5.0.1
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	https://launchpad.net/do/trunk/0.4/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	14d9472dee8f6073adf0a6a3e60789f9
+Source0:	https://launchpad.net/do/trunk/0.5/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	1bc096b9ac6cd5fa30d5339be6dd6d9d
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
+BuildRequires:	dotnet-gnome-desktop-sharp-devel
+BuildRequires:	dotnet-gnome-keyring-sharp-devel >= 96902-2
 BuildRequires:	dotnet-gnome-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
@@ -55,7 +57,7 @@ sed -i -e 's/^pkglib_SCRIPTS =/DLLFILES =/;s/^programfiles_DATA.*/& $(DLLFILES)/
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4/shamrock
 %{__autoconf}
 %{__automake}
 %configure
