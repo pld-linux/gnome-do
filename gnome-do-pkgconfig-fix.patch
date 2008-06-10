@@ -1,0 +1,9 @@
+diff -ruN gnome-do-0.5.0.1./Do.DBus/do.dbus.pc.in gnome-do-0.5.0.1/Do.DBus/do.dbus.pc.in
+--- gnome-do-0.5.0.1./Do.DBus/do.dbus.pc.in	2008-06-10 02:48:12.000000000 +0200
++++ gnome-do-0.5.0.1/Do.DBus/do.dbus.pc.in	2008-06-10 17:41:15.688816560 +0200
+@@ -3,4 +3,4 @@
+ Version: 0.1
+ 
+ Requires: 
+-Libs: -r:@expanded_libdir@/lib/@PACKAGE@/Do.DBus.dll
++Libs: -r:@expanded_libdir@/@PACKAGE@/Do.DBus.dll
