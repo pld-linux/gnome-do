@@ -2,13 +2,12 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.5.0.1
+Version:	0.6.1.0
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	https://launchpad.net/do/trunk/0.5/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	1bc096b9ac6cd5fa30d5339be6dd6d9d
-Patch0:		%{name}-pkgconfig-fix.patch
+Source0:	http://launchpad.net/do/0.6/0.6.1/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	1b5df15e89f720b43c15e7bc8c205265
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -18,13 +17,16 @@ BuildRequires:	dotnet-gnome-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel
+BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	gtk+2-devel >= 1:2.0
 BuildRequires:	libtool
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
+Suggests:	gnome-do-plugins
 Requires:	xdg-utils
+Requires(post,postun):	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,7 +56,6 @@ Informacje programistyczne dla wtyczek GNOME Do.
 
 %prep
 %setup -q
-%patch0 -p1
 
 sed -i -e 's/^pkglib_SCRIPTS =/DLLFILES =/;s/^programfiles_DATA.*/& $(DLLFILES)/' Makefile.include
 
@@ -78,6 +79,14 @@ rm $RPM_BUILD_ROOT%{_libdir}/gnome-do/*.la
 
 %find_lang %{name} --with-gnome
 
+%post
+%update_desktop_database_post
+%update_icon_cache hicolor
+
+%postun
+%update_desktop_database_postun
+%update_icon_cache hicolor
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -97,6 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnome-do
 %dir %{_datadir}/gnome-do/plugins
 %{_desktopdir}/gnome-do.desktop
+%{_sysconfdir}/gconf/schemas/gnome-do.schemas
+%{_iconsdir}/hicolor/*/apps/gnome-do.png
+%{_iconsdir}/hicolor/*/apps/gnome-do.svg
 
 %files devel
 %defattr(644,root,root,755)
