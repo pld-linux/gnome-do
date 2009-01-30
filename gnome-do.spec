@@ -2,12 +2,12 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.6.1.0
+Version:	0.8.0
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/do/0.6/0.6.1/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	1b5df15e89f720b43c15e7bc8c205265
+Source0:	http://edge.launchpad.net/do/trunk/0.8.0/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	29e8d088bf31d6e02b436f74e21c52be
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -57,8 +57,6 @@ Informacje programistyczne dla wtyczek GNOME Do.
 %prep
 %setup -q
 
-sed -i -e 's/^pkglib_SCRIPTS =/DLLFILES =/;s/^programfiles_DATA.*/& $(DLLFILES)/' Makefile.include
-
 %build
 %{__libtoolize}
 %{__aclocal} -I m4/shamrock
@@ -101,7 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %{_prefix}/lib/gnome-do/Do.exe
 %{_prefix}/lib/gnome-do/Do.exe.config
+%{_prefix}/lib/gnome-do/Do.exe.mdb
 %{_prefix}/lib/gnome-do/Do.*.dll
+%{_prefix}/lib/gnome-do/Do.*.dll.config
 %{_prefix}/lib/gnome-do/Do.*.dll.mdb
 %dir %{_datadir}/gnome-do
 %dir %{_datadir}/gnome-do/plugins
@@ -112,5 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_pkgconfigdir}/do.addins.pc
-%{_pkgconfigdir}/do.dbus.pc
+%{_pkgconfigdir}/do.platform.pc
+%{_pkgconfigdir}/do.platform.linux.pc
+%{_pkgconfigdir}/do.interface.linux.pc
+%{_pkgconfigdir}/do.universe.pc
