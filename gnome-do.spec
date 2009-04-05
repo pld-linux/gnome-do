@@ -2,12 +2,12 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.8.1.1
+Version:	0.8.1.3
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
 Source0:	http://edge.launchpad.net/do/0.8/0.8.1/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	d16d23281d9114abb5a318874f13a9e6
+# Source0-md5:	512b866475b17291c1acda2be1af2124
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
