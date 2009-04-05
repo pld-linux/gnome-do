@@ -94,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gnome-do
 %attr(755,root,root) %{_libdir}/gnome-do/*.so
-%{_libdir}/gnome-do/Do.exe
+%attr(755,root,root) %{_libdir}/gnome-do/Do.exe
 %{_libdir}/gnome-do/Do.exe.config
 %{_libdir}/gnome-do/Do.exe.mdb
 %{_libdir}/gnome-do/Do.*.dll
@@ -102,7 +102,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnome-do/Do.*.dll.mdb
 %dir %{_datadir}/gnome-do
 %{_datadir}/gnome-do/ClockTheme
-%dir %{_datadir}/gnome-do
 %dir %{_datadir}/gnome-do/plugins
 %{_desktopdir}/gnome-do.desktop
 %{_sysconfdir}/gconf/schemas/gnome-do.schemas
