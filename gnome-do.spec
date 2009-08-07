@@ -3,7 +3,7 @@ Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
 Version:	0.8.2
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Applications
 Source0:	http://edge.launchpad.net/do/0.8/0.8.2/+download/%{name}-%{version}.tar.gz
@@ -48,6 +48,7 @@ otwierać, wysyłać e-maile, rozmawiać, odtwarzać...).
 Summary:	Development information for GNOME Do plugins
 Summary(pl.UTF-8):	Informacje programistyczne dla wtyczek GNOME Do
 Group:		X11/Development/Libraries
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 Development information for GNOME Do plugins.
@@ -94,6 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gnome-do
+%dir %{_libdir}/gnome-do/plugins
 %attr(755,root,root) %{_libdir}/gnome-do/*.so
 %attr(755,root,root) %{_libdir}/gnome-do/Do.exe
 %{_libdir}/gnome-do/Do.addins
