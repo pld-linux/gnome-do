@@ -2,12 +2,12 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.8.1.3
+Version:	0.8.2
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://edge.launchpad.net/do/0.8/0.8.1/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	512b866475b17291c1acda2be1af2124
+Source0:	http://edge.launchpad.net/do/0.8/0.8.2/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	f84f05f08c12615e1665c6f0d392b8bb
 URL:		http://do.davebsd.com/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -20,6 +20,7 @@ BuildRequires:	dotnet-ndesk-dbus-sharp-devel
 BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	gtk+2-devel >= 1:2.0
 BuildRequires:	libtool
+BuildRequires:	mono-addins-devel
 BuildRequires:	mono-csharp >= 1.1.13
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(monoautodeps)
@@ -95,6 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gnome-do
 %attr(755,root,root) %{_libdir}/gnome-do/*.so
 %attr(755,root,root) %{_libdir}/gnome-do/Do.exe
+%{_libdir}/gnome-do/Do.addins
 %{_libdir}/gnome-do/Do.exe.config
 %{_libdir}/gnome-do/Do.exe.mdb
 %{_libdir}/gnome-do/Do.*.dll
@@ -103,6 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/gnome-do
 %{_datadir}/gnome-do/ClockTheme
 %dir %{_datadir}/gnome-do/plugins
+%{_sysconfdir}/xdg/autostart/gnome-do.desktop
 %{_desktopdir}/gnome-do.desktop
 %{_sysconfdir}/gconf/schemas/gnome-do.schemas
 %{_iconsdir}/hicolor/*/apps/gnome-do.png
@@ -113,4 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/do.platform.pc
 %{_pkgconfigdir}/do.platform.linux.pc
 %{_pkgconfigdir}/do.interface.linux.pc
+%{_pkgconfigdir}/do.interface.linux.animationbase.pc
+%{_pkgconfigdir}/do.interface.linux.docky.pc
+%{_pkgconfigdir}/do.interface.wink.pc
 %{_pkgconfigdir}/do.universe.pc
