@@ -3,7 +3,7 @@ Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
 Version:	0.8.2
-Release:	2
+Release:	3
 License:	GPL v3
 Group:		X11/Applications
 Source0:	http://edge.launchpad.net/do/0.8/0.8.2/+download/%{name}-%{version}.tar.gz
@@ -27,6 +27,7 @@ BuildRequires:	rpmbuild(monoautodeps)
 BuildRequires:	sed >= 4.0
 Requires(post,postun):	hicolor-icon-theme
 Requires:	xdg-utils
+Suggests:	gnome-do-docklets
 Suggests:	gnome-do-plugins
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -69,7 +70,6 @@ Informacje programistyczne dla wtyczek GNOME Do.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_datadir}/gnome-do/plugins
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -95,7 +95,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/gnome-do
-%dir %{_libdir}/gnome-do/plugins
 %attr(755,root,root) %{_libdir}/gnome-do/*.so
 %attr(755,root,root) %{_libdir}/gnome-do/Do.exe
 %{_libdir}/gnome-do/Do.addins
@@ -106,7 +105,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/gnome-do/Do.*.dll.mdb
 %dir %{_datadir}/gnome-do
 %{_datadir}/gnome-do/ClockTheme
-%dir %{_datadir}/gnome-do/plugins
 %{_sysconfdir}/xdg/autostart/gnome-do.desktop
 %{_desktopdir}/gnome-do.desktop
 %{_sysconfdir}/gconf/schemas/gnome-do.schemas
