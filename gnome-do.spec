@@ -9,6 +9,7 @@ Group:		X11/Applications
 Source0:	http://edge.launchpad.net/do/0.8/0.8.3/+download/%{name}-%{version}.tar.gz
 # Source0-md5:	6b4e2b55241892d165b504b1fb98645e
 URL:		http://do.davebsd.com/
+BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
 BuildRequires:	dotnet-gnome-desktop-sharp-devel
@@ -18,7 +19,9 @@ BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
 BuildRequires:	dotnet-ndesk-dbus-sharp-devel
 BuildRequires:	dotnet-notify-sharp-devel
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.0
+BuildRequires:	intltool
 BuildRequires:	libtool
 BuildRequires:	mono-addins-devel
 BuildRequires:	mono-csharp >= 1.1.13
@@ -49,7 +52,7 @@ otwierać, wysyłać e-maile, rozmawiać, odtwarzać...).
 Summary:	Development information for GNOME Do plugins
 Summary(pl.UTF-8):	Informacje programistyczne dla wtyczek GNOME Do
 Group:		X11/Development/Libraries
-Requires: %{name} = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Development information for GNOME Do plugins.
