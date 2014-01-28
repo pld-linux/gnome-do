@@ -2,18 +2,20 @@
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
-Version:	0.8.3.1
-Release:	2
+Version:	0.95.1
+Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://edge.launchpad.net/do/0.8/0.8.3/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	6b4e2b55241892d165b504b1fb98645e
+Source0:	http://edge.launchpad.net/do/trunk/%{version}/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	1f61376718d75d3defcdf81958754296
 URL:		http://do.davebsd.com/
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
+BuildRequires:	dotnet-gio-sharp-devel
+BuildRequires:	dotnet-gkeyfile-sharp-devel
 BuildRequires:	dotnet-gnome-desktop-sharp-devel
-BuildRequires:	dotnet-gnome-keyring-sharp-devel >= 96902-2
+BuildRequires:	dotnet-gnome-keyring-sharp-devel
 BuildRequires:	dotnet-gnome-sharp-devel
 BuildRequires:	dotnet-gtk-sharp2-devel
 BuildRequires:	dotnet-ndesk-dbus-glib-sharp-devel
@@ -22,6 +24,7 @@ BuildRequires:	dotnet-notify-sharp-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.0
 BuildRequires:	intltool
+BuildRequires:	librsvg
 BuildRequires:	libtool
 BuildRequires:	mono-addins-devel
 BuildRequires:	mono-csharp >= 1.1.13
@@ -79,7 +82,13 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	linuxpkgconfigdir=%{_pkgconfigdir}
 
-rm $RPM_BUILD_ROOT%{_libdir}/gnome-do/*.la
+for s in 16 24 32 48 64 128 ; do
+	rsvg-convert -w $s -h $s -f png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/${s}x${s}/apps/gnome-do.svg \
+		>$RPM_BUILD_ROOT%{_iconsdir}/hicolor/${s}x${s}/apps/gnome-do.png
+	%{__rm} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/${s}x${s}/apps/gnome-do.svg
+done
+
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-do/*.la
 
 %find_lang %{name} --with-gnome
 
@@ -102,13 +111,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gnome-do/*.so
 %attr(755,root,root) %{_libdir}/gnome-do/Do.exe
 %{_libdir}/gnome-do/Do.addins
-%{_libdir}/gnome-do/Do.exe.config
 %{_libdir}/gnome-do/Do.exe.mdb
 %{_libdir}/gnome-do/Do.*.dll
 %{_libdir}/gnome-do/Do.*.dll.config
 %{_libdir}/gnome-do/Do.*.dll.mdb
-%dir %{_datadir}/gnome-do
-%{_datadir}/gnome-do/ClockTheme
+%{_libdir}/gnome-do/gio-sharp.dll
+%{_libdir}/gnome-do/gio-sharp.dll.config
 %{_sysconfdir}/xdg/autostart/gnome-do.desktop
 %{_desktopdir}/gnome-do.desktop
 %{_sysconfdir}/gconf/schemas/gnome-do.schemas
@@ -121,6 +129,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/do.platform.linux.pc
 %{_pkgconfigdir}/do.interface.linux.pc
 %{_pkgconfigdir}/do.interface.linux.animationbase.pc
-%{_pkgconfigdir}/do.interface.linux.docky.pc
-%{_pkgconfigdir}/do.interface.wink.pc
 %{_pkgconfigdir}/do.universe.pc
