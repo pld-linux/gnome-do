@@ -3,7 +3,7 @@ Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
 Version:	0.95.1
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Applications
 Source0:	http://edge.launchpad.net/do/trunk/%{version}/+download/%{name}-%{version}.tar.gz
@@ -89,6 +89,9 @@ for s in 16 24 32 48 64 128 ; do
 done
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/gnome-do/*.la
+
+# WTF are those?
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{jv,ltg,nap,tet,tyv}
 
 %find_lang %{name} --with-gnome
 
