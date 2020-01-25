@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.mono
 Summary:	A powerful, speedy, and sexy remote control for your GNOME Desktop
 Summary(pl.UTF-8):	Potężne, szybkie i seksowne zdalne sterowanie pulpitem GNOME
 Name:		gnome-do
